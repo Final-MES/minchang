@@ -14,6 +14,7 @@
 # ⚙️ Next.js
 /.next/
 out/
+him-mes-dashboard/node_modules/
 
 # 🛠️ Production
 /build
