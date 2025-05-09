@@ -1,0 +1,61 @@
+# 📦 Dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# 🧪 Testing
+/coverage
+
+# ⚙️ Next.js
+/.next/
+out/
+
+# 🛠️ Production
+/build
+
+# 🐍 Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+build/
+dist/
+*.egg-info/
+
+# 📝 Editor settings
+.vscode/
+.idea/
+
+# 🧪 TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# 🔐 Environment & Credentials
+.env
+.env*
+*.pem
+
+# 🐳 Docker
+*.tar
+.dockerignore
+docker-compose.override.yml
+Dockerfile.*
+
+# 🖥️ macOS & System
+.DS_Store
+
+# 🐛 Logs & Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ▲ Vercel
+.vercel
