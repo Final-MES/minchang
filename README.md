@@ -20,14 +20,30 @@
 
 ## 1. 내가 맡은 역할 ✍
 
-- 📐 MySQL 기반 진동 수집 데이터베이스 설계
-- ⚙️ FastAPI 기반 진단 API 서버 개발 및 EC2 배포
-- 📤 150만 건 이상 진동 데이터 업로드 자동화 스크립트 제작
-- 📈 Streamlit 기반 진동 시각화 대시보드 구현
-- 📊 Next.js 기반 진단 결과 시계열 대시보드 연동 API 구성
-- ☁️ AWS RDS / EC2 / Docker를 통한 클라우드 인프라 구성
+### ☁️ 클라우드 서버 관리
+- AWS EC2 인스턴스를 이용한 FastAPI 서버 호스팅
+- Docker를 이용한 FastAPI 컨테이너화 및 배포 자동화
+- AWS RDS(MySQL) 연동 및 보안 그룹, 포트 관리
 
-## 🧰 사용 기술 스택 (Used Tech Stack)
+### 🗄️ DB 설계 및 관리
+- MySQL 기반 진동 수집 및 진단 테이블 스키마 설계
+- SQLAlchemy를 이용한 ORM 매핑 및 데이터 모델링
+- 측정시간 기반 대용량 데이터 저장 및 조회 쿼리 최적화
+- 150만 건 이상 진동 데이터를 중복 검사 및 자동 업로드 스크립트 구현
+
+### 🔧 API 개발 및 관리
+- FastAPI 기반 RESTful API 설계 및 구현
+- `/vibration-data`, `/vibration-diagnosis` 등 진동 수집 및 진단 데이터 관리 API 개발
+- 기계별 최근 진단 데이터 조회를 위한 고급 SQL 서브쿼리 및 응답 구조 설계
+- Swagger 문서 자동화 및 팀원 테스트 환경 제공
+
+### 🎨 대시보드 제작
+- Streamlit 기반 진동 파형 시각화 대시보드 개발
+- Vercel에 배포된 Next.js 기반 진단 결과 시계열 그래프 페이지 제작
+- Recharts, Chart.js 등 라이브러리 활용하여 실시간 고장 히스토리 시각화
+- 사용자 선택 필터(기계명, 날짜, 상태 유형) 및 커스텀 툴팁 UI 구성
+
+## 2. 🧰 사용 기술 스택 (Used Tech Stack)
 
 ### 🔙 백엔드 / 서버
 ![Python](https://img.shields.io/badge/language-Python-3776AB)
