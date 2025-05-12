@@ -390,7 +390,7 @@ API 테스트 및 프론트/ML 연동을 위해 FastAPI가 제공하는 **Swagge
 ```python
 @app.get("/vibration-diagnosis", response_model=List[schemas.VibrationDiagnosisRead],
          tags=["진단 결과"], summary="전체 진단 결과 조회")
-
+```
 
 ![FastAPI Swagger 문서](images/swagger_ui_example.png)
 
