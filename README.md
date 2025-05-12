@@ -70,3 +70,135 @@
 ### 📄 기타 정보
 ![version](https://img.shields.io/badge/version-1.0.0-brightgreen)
 ![license](https://img.shields.io/badge/license-MIT-yellow)
+
+## 내가 했던 일들에 대한 자세한 개요.
+
+## 1. DB (MySQL)
+
+### ✅ 어떤 작업을 했는가?
+
+MES 시스템의 진동 수집 및 AI 진단 결과 처리를 위한 데이터베이스를 설계하였습니다.  
+초기에는 AI 학습 데이터의 구조조차 명확하지 않은 상태였고, 이에 따라 일반적인 MES 구성을 바탕으로 예비 테이블을 작성하였습니다.
+
+---
+
+### 🔎 초기 예비 테이블 설계
+
+초기에는 MES에서 일반적으로 필요한 정보를 기반으로 다음과 같은 테이블을 예상하여 설계하였습니다.
+
+```sql
+-- 설비 마스터 테이블
+CREATE TABLE equipment_info (
+    equipment_id VARCHAR(50) PRIMARY KEY,
+    name VARCHAR(100),
+    location VARCHAR(100),
+    installed_at DATE
+);
+
+-- 설비 상태 기록 테이블
+CREATE TABLE equipment_data (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    equipment_id VARCHAR(50),
+    image_path VARCHAR(255),
+    status ENUM('running', 'stop', 'error') DEFAULT 'stop',
+    temperature DECIMAL(10,3),
+    speed DECIMAL(10,3),
+    runtime DECIMAL(10,3),
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (equipment_id) REFERENCES equipment_info(equipment_id)
+);
+
+-- 이상 탐지 기록 테이블
+CREATE TABLE anomaly_log (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    equipment_id VARCHAR(50),
+    model_name VARCHAR(30),
+    message VARCHAR(255),
+    severity ENUM('1','2','3','4','5'),
+    detected_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (equipment_id) REFERENCES equipment_info(equipment_id)
+);
+
+-- 품질 검사 기록 테이블
+CREATE TABLE quality_log (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    product_name VARCHAR(50),
+    equipment_id VARCHAR(50),
+    measure_item VARCHAR(20),
+    measured_value DECIMAL(10,3),
+    target_value DECIMAL(10,3),
+    tolerance DECIMAL(10,3),
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (equipment_id) REFERENCES equipment_info(equipment_id)
+);
+📌 참고: 당시에는 AI 학습 데이터의 구조와 진단 결과 형식에 대한 정보가 부족하여, 일반적인 예측 보전 시스템의 구조에 맞추어 설계하였습니다.
+
+🧩 문제 파악 및 분석
+이후 MLOps 팀 및 수집 데이터 파일을 분석한 결과, 사용 데이터는 회전기계의 진동 데이터를 기반으로 하며, 일부러 고장 상태를 만들어 측정한 센서 값임을 확인했습니다.
+
+측정 시간 (measured_time)
+
+각 고장 유형별 진동 수치:
+
+normal (정상 상태)
+
+unbalance (질량 불균형)
+
+looseness (지지 불량)
+
+unbalance_looseness (복합 고장)
+
+또한 AI 진단 결과는 0~3 범위의 숫자로 출력되며, 각각 다음과 같은 상태를 의미합니다:
+
+0: 정상
+
+1: 질량 불균형
+
+2: 지지 불량
+
+3: 복합 불량
+
+📸 센서 데이터 예시
+아래는 실제 사용된 회전기계 진동 데이터(g1_sensor1.csv)의 일부입니다.
+
+
+컬럼 설명:
+
+A열: 측정 시간 (measured_time)
+
+B~E열: 각 고장 유형에 해당하는 진동 값
+
+🛠️ 최종 테이블 설계
+위 데이터를 기반으로, 복잡도를 낮추고 목적에 집중된 다음과 같은 테이블로 재설계하였습니다.
+
+sql
+-- 진동 수집 데이터 테이블
+CREATE TABLE vibration_data (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    machine_name VARCHAR(50) NOT NULL,
+    sensor_no VARCHAR(20) NOT NULL,
+    collected_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    measured_time FLOAT NOT NULL,
+    normal FLOAT NOT NULL,
+    unbalance FLOAT NOT NULL,
+    looseness FLOAT NOT NULL,
+    unbalance_looseness FLOAT NOT NULL
+);
+
+-- 진단 결과 테이블
+CREATE TABLE vibration_diagnosis (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    machine_name VARCHAR(50) NOT NULL,
+    detected_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fault_type TINYINT NOT NULL CHECK (fault_type IN (0, 1, 2, 3))
+        COMMENT '0: 정상, 1: 질량 불균형, 2: 지지 불량, 3: 복합 불량'
+);
+📌 결과 및 의의
+실제 사용 데이터 구조에 적합한 테이블로 재설계
+
+AI 학습 및 진단 결과 관리에 최적화된 구조 구성
+
+DB 설계 → 데이터 해석 → AI 결과 반영까지 전체 흐름을 책임지고 수행
+
+해당 DB 구조는 이후 FastAPI 백엔드 서버 및 Next.js 기반 대시보드와 연동되어
+AI 기반 진단 시스템의 핵심 데이터 흐름을 담당하게 되었습니다.
