@@ -161,7 +161,7 @@ unbalance_looseness (복합 고장)
 
 📸 센서 데이터 예시
 아래는 실제 사용된 회전기계 진동 데이터(g1_sensor1.csv)의 일부입니다.
-
+![센서 데이터 예시](./images/sensor_data_example.png)
 
 컬럼 설명:
 
