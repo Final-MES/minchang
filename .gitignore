@@ -12,7 +12,7 @@
 /coverage
 
 # ⚙️ Next.js
-/.next/
+**/.next/
 out/
 him-mes-dashboard/node_modules/
 

@@ -131,6 +131,7 @@ CREATE TABLE quality_log (
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (equipment_id) REFERENCES equipment_info(equipment_id)
 );
+```
 📌 참고: 당시에는 AI 학습 데이터의 구조와 진단 결과 형식에 대한 정보가 부족하여, 일반적인 예측 보전 시스템의 구조에 맞추어 설계하였습니다.
 
 🧩 문제 파악 및 분석
@@ -171,7 +172,7 @@ B~E열: 각 고장 유형에 해당하는 진동 값
 🛠️ 최종 테이블 설계
 위 데이터를 기반으로, 복잡도를 낮추고 목적에 집중된 다음과 같은 테이블로 재설계하였습니다.
 
-sql
+```sql
 -- 진동 수집 데이터 테이블
 CREATE TABLE vibration_data (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -193,6 +194,8 @@ CREATE TABLE vibration_diagnosis (
     fault_type TINYINT NOT NULL CHECK (fault_type IN (0, 1, 2, 3))
         COMMENT '0: 정상, 1: 질량 불균형, 2: 지지 불량, 3: 복합 불량'
 );
+```
+
 📌 결과 및 의의
 실제 사용 데이터 구조에 적합한 테이블로 재설계
 
