@@ -384,6 +384,7 @@ API 테스트 및 프론트/ML 연동을 위해 FastAPI가 제공하는 **Swagge
 ```
 
 ![FastAPI Swagger 문서](images/swagger_ui_example.png)
+> FastAPI Swagger 실행 화면
 
 이러한 정리는 프론트엔드 및 머신러닝 팀과의 협업 과정에서  
 "API 문서를 따로 만들지 않아도 즉시 이해하고 사용할 수 있었다"는 피드백을 받았고,  
@@ -515,6 +516,7 @@ FastAPI API 테스트 + 데이터 시각화의 초기 검증용으로 활용되�
 - 이후 **기계+센서 조합별 0~140초 내 N개 추출 API** (`/vibration-data/grouped-range`)를 추가하여 해결
 
 ![Streamlit 시계열 그래프](images/streamlit_vibration_linechart.png)
+> Streamlit 시계열 그래프
 
 🧪 당시 진단 결과 테이블 기반 대시보드도 시도했으나,  
 DB에 진단 데이터가 없어서 시각화 시 에러 발생 → 실제로 동작하지 못함
