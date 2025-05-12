@@ -249,7 +249,7 @@ AI 기반 진단 시스템의 핵심 데이터 흐름을 담당하게 되었습�
 결론적으로, **RDS를 통해 팀 전체가 동일한 DB 환경에서 협업하고, 실제 운영 환경처럼 API 서버와의 연결을 테스트**할 수 있어  
 최종적으로 AWS RDS를 선택하게 되었습니다.
 
-![RDS 인스턴스 관리 화면](./images/aws_rds_instance.png)  
+![RDS 인스턴스 관리 화면](./images/aws_rds_dashboard.png)  
 > AWS RDS 인스턴스 상태 화면 – MySQL 기반 `him-mes` 데이터베이스
 
 ### ✅ EC2를 사용하게 된 이유
