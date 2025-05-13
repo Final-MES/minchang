@@ -724,6 +724,94 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 각 페이지마다 독립된 탭 제목 설정이 가능해졌으며,
 브라우저 탭, 북마크, 검색엔진 최적화(SEO) 등에도 긍정적인 영향을 줄 수 있습니다. ✅
 
+### 5. Vercel을 통한 대시보드 배포
+#### ✅ 1. 배포 방식 및 절차
+최종적으로 완성한 Next.js 기반 대시보드는 Vercel 플랫폼을 통해 무료로 배포하였습니다.
+
+Vercel은 Next.js 공식 배포 플랫폼으로, 다음과 같은 특징이 있습니다:
+
+  - GitHub 연동을 통한 자동 배포
+
+  - 기본 HTTPS 제공
+
+  - 무료 요금제 기준에서도 빠른 속도 제공
+
+  - 커스텀 도메인 설정 가능
+
+🛠️ 배포 절차 요약
+  1. https://vercel.com 접속
+
+  2. GitHub 계정으로 로그인
+
+  3. 배포할 Next.js 프로젝트가 포함된 GitHub 레포지토리 선택
+
+  4. 배포 설정 없이 기본 상태로 "Deploy" 버튼 클릭
+
+  5. 수 초 내로 배포 완료 → .vercel.app 주소 자동 생성
+
+📌 별도의 EC2, Docker 설정 없이도
+정적/동적 웹 대시보드를 빠르게 운영할 수 있는 것이 큰 장점입니다.
+
+#### ✅ 2. 사용 방법 및 접근 방식
+아래는 Vercel에 배포된 Next.js 대시보드 각각의 페이지별 주소입니다:
+
+| 대시보드 이름 | 설명 | 접속 링크 |
+|---------------|------|------------|
+| 진동 데이터 테이블 | 수집된 진동 데이터를 기계/센서별로 필터링하여 표 형태로 시각화 | [vibration-table](https://him-mes-vercel.vercel.app/vibration-table) |
+| 진단 결과 대시보드 | 각 기계의 최근 AI 진단 결과를 표로 표시 | [diagnosis-dashboard](https://him-mes-vercel.vercel.app/diagnosis-dashboard) |
+| 고장 진단 시계열 | 시간 흐름에 따라 기계별 고장 유형 변화를 시계열 그래프로 표현 | [machine-fault-timeline](https://him-mes-vercel.vercel.app/machine-fault-timeline) |
+
+브라우저 주소창에 해당 주소를 입력하거나 클릭하면 누구나 접근할 수 있으며,  
+FastAPI API 서버와 연동되어 실시간 데이터를 표시합니다.
+
+![Vercal 서버 이미지](images/vercel_deployment_status.png)
+> 실제 운영 중인 Vercel 배포 상태 확인 화면
+
+📌 참고 사항
+해당 대시보드는 Next.js + Recharts 기반으로 구성되어 있으며,
+
+백엔드는 EC2에 배포된 FastAPI 서버를 통해 진동 데이터 및 진단 결과를 수신합니다.
+
+FastAPI에는 CORS, 데이터 유효성 검증 등의 처리가 사전 구성되어 있어,
+프론트엔드는 fetch() 기반으로 안정적으로 API 호출 및 데이터 표시가 가능합니다.
+
+### 6. MFC – Next.js 연동
+#### ✅ 연동 필요 배경
+
+프로젝트에서 MFC 기반의 스마트팩토리 통합 대시보드 GUI가 이미 구현된 상황이었으며,
+그 안에서 별도로 내가 만든 Next.js 웹 대시보드 화면을 통합하는 것이 요구되었음.
+
+![MFC 기본 대시보드 프레임](images/mfc_dashboard_frame.png)
+> MFC로 구현된 대시보드 기본 화면
+
+#### ✅ 고려한 연동 방법
+연동 방식은 크게 다음 두 가지를 비교·고려하였음:
+
+| 상태 | 예시 |
+|------|------|
+| 기본 타이틀 (수정 전) | ![기본 상태](images/nextjs_default_tab_title.png) |
+| 각 페이지별 타이틀 분리 (수정 후) | ![분리된 상태](images/nextjs_custom_tab_titles.png) |
+
+#### ✅ 최종 선택: 외부 브라우저 연동 방식 (방법②)
+WebView2는 초기 설정 및 버전 호환 문제 등으로 시간이 많이 소요될 수 있었음
+
+발표 및 시연 일정이 촉박했던 상황에서 빠르고 확실하게 연동 가능한 방식이 필요했음
+
+이에 따라 MFC에서 버튼 클릭 시 ShellExecute()로 Vercel 배포 주소를 여는 방식을 채택함
+
+```cpp
+ShellExecute(0, NULL, _T("https://him-mes-vercel.vercel.app/vibration-table"), NULL, NULL, SW_SHOWNORMAL);
+```
+#### ✅ 연동 결과 및 장점
+
+빠르게 브라우저에서 완성된 대시보드를 열 수 있어 팀 발표 및 테스트에 적합
+
+Vercel에서 호스팅된 Next.js 페이지이기 때문에 EC2 서버 자원 부담 없음
+
+추후 WebView2로 내부 탭화 구현 시에도 동일 주소 기반이므로 확장 가능
+
+
+
 
 
 
