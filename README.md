@@ -17,60 +17,62 @@
 
 ---
 
+---
+
 ## 1. 내가 맡은 역할 ✍
 
 ### ☁️ 클라우드 서버 관리
 - AWS EC2 인스턴스를 이용한 FastAPI 서버 호스팅
-- Docker를 이용한 FastAPI 컨테이너화 및 배포 자동화
-- AWS RDS(MySQL) 연동 및 보안 그룹, 포트 관리
+- Docker를 활용한 FastAPI 컨테이너화 및 자동화 배포
+- AWS RDS(MySQL) 연동 및 보안 그룹, 포트 설정 최적화
 
 ### 🗄️ DB 설계 및 관리
 - MySQL 기반 진동 수집 및 진단 테이블 스키마 설계
-- SQLAlchemy를 이용한 ORM 매핑 및 데이터 모델링
-- 측정시간 기반 대용량 데이터 저장 및 조회 쿼리 최적화
+- SQLAlchemy를 활용한 ORM 매핑 및 데이터 모델링
+- `measured_time` 기반 대용량 데이터 저장 및 조회 쿼리 최적화
 - 150만 건 이상 진동 데이터를 중복 검사 및 자동 업로드 스크립트 구현
 
 ### 🔧 API 개발 및 관리
 - FastAPI 기반 RESTful API 설계 및 구현
-- `/vibration-data`, `/vibration-diagnosis` 등 진동 수집 및 진단 데이터 관리 API 개발
-- 기계별 최근 진단 데이터 조회를 위한 고급 SQL 서브쿼리 및 응답 구조 설계
+- `/vibration-data`, `/vibration-diagnosis` 등 핵심 진동 데이터 관리 API 개발
+- 기계별 최근 진단 데이터 조회용 고급 SQL 서브쿼리 및 응답 구조 설계
 - Swagger 문서 자동화 및 팀원 테스트 환경 제공
 
 ### 🎨 대시보드 제작
-- Streamlit 기반 진동 파형 시각화 대시보드 개발
-- Vercel에 배포된 Next.js 기반 진단 결과 시계열 그래프 페이지 제작
-- Recharts, Chart.js 등 라이브러리 활용하여 실시간 고장 히스토리 시각화
-- 사용자 선택 필터(기계명, 날짜, 상태 유형) 및 커스텀 툴팁 UI 구성
+- Streamlit 기반 진동 파형 시각화 대시보드 개발 (초기 테스트용)
+- Vercel에 배포된 Next.js 기반 진단 결과 시계열 대시보드 제작
+- Recharts, Chart.js 등 라이브러리를 활용한 실시간 고장 히스토리 시각화
+- 사용자 필터(기계명, 날짜, 상태 유형) 및 커스텀 툴팁 UI 구성
 
 ---
 
 ## 2. 🧰 사용 기술 스택 (Used Tech Stack)
 
 ### 🔙 백엔드 / 서버
-![Python](https://img.shields.io/badge/language-Python-3776AB)
-![FastAPI](https://img.shields.io/badge/framework-FastAPI-009688)
-![SQLAlchemy](https://img.shields.io/badge/ORM-SQLAlchemy-FF6F00)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-FF6F00?style=flat)
 
 ### 🧮 데이터베이스
-![MySQL](https://img.shields.io/badge/DB-MySQL-4479A1)
-![AWS RDS](https://img.shields.io/badge/database-AWS%20RDS-527FFF)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
+![AWS RDS](https://img.shields.io/badge/AWS%20RDS-527FFF?style=flat&logo=amazonaws&logoColor=white)
 
 ### 🎨 대시보드 / 프론트엔드
-![Streamlit](https://img.shields.io/badge/visualization-Streamlit-FF4B4B)
-![Next.js](https://img.shields.io/badge/frontend-Next.js-000000)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=next.js&logoColor=white)
 
 ### ☁️ 클라우드 / 배포
-![AWS EC2](https://img.shields.io/badge/cloud-AWS%20EC2-FF9900)
-![Docker](https://img.shields.io/badge/container-Docker-2496ED)
-![Vercel](https://img.shields.io/badge/deploy-Vercel-000000)
+![AWS EC2](https://img.shields.io/badge/AWS%20EC2-FF9900?style=flat&logo=amazonaws&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white)
 
 ### 🔧 개발 도구
-![Git](https://img.shields.io/badge/version--control-Git-F05032)
-![GitHub](https://img.shields.io/badge/repo-GitHub-181717)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)
 
 ### 📄 기타 정보
-![version](https://img.shields.io/badge/version-1.0.0-brightgreen)
-![license](https://img.shields.io/badge/license-MIT-yellow)
+![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen?style=flat)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat)
 
 ---
 
