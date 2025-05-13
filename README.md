@@ -718,6 +718,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 | `/machine-fault-timeline`| 고장 진단 시계열        |
 
 > 각 페이지별 타이틀 분리 (수정후)
+
 ![분리된 상태](images/nextjs_custom_tab_titles.png)
 
 이와 같은 구조를 통해
@@ -787,10 +788,10 @@ FastAPI에는 CORS, 데이터 유효성 검증 등의 처리가 사전 구성되
 #### ✅ 고려한 연동 방법
 연동 방식은 크게 다음 두 가지를 비교·고려하였음:
 
-| 상태 | 예시 |
+| 방법 | 설명 |
 |------|------|
-| 기본 타이틀 (수정 전) | ![기본 상태](images/nextjs_default_tab_title.png) |
-| 각 페이지별 타이틀 분리 (수정 후) | ![분리된 상태](images/nextjs_custom_tab_titles.png) |
+| **① WebView2** | MFC 창 내부에 브라우저 엔진을 삽입하여 Next.js 화면을 내장 |
+| **② 링크 클릭 → 브라우저 열기** | 버튼 클릭 시 외부 브라우저에서 Next.js 페이지를 새 창으로 열기 |
 
 #### ✅ 최종 선택: 외부 브라우저 연동 방식 (방법②)
 WebView2는 초기 설정 및 버전 호환 문제 등으로 시간이 많이 소요될 수 있었음
