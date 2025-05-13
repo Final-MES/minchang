@@ -663,7 +663,7 @@ page.tsx에서 use client 환경에서는 export const metadata 사용이 불가
 ├── layout.tsx       ← 최소 레이아웃 유지
 └── Client.tsx       ← 실제 대시보드 UI 구성
 ```
-1. \`Client.tsx\` – 클라이언트 컴포넌트 분리
+1. `Client.tsx` – 클라이언트 컴포넌트 분리
 ```tsx
 // src/app/machine-fault-timeline/Client.tsx
 'use client';
@@ -676,7 +676,7 @@ export default function MachineFaultTimelineClient() {
 ```
 > 👉 대시보드 UI 로직 및 상호작용이 포함된 컴포넌트
 
-2. \`page.tsx\` – Metadata 설정 및 Client 호출
+2. `page.tsx` – Metadata 설정 및 Client 호출
 ```tsx
 // src/app/machine-fault-timeline/page.tsx
 import { Metadata } from 'next';
@@ -693,7 +693,7 @@ export default function Page() {
 ```
 > 👉 각 페이지별 탭 타이틀과 설명을 개별적으로 정의 가능
 
-3. \`layout.tsx\` – 최소한의 HTML 구조 유지
+3. `layout.tsx` – 최소한의 HTML 구조 유지
 ```tsx
 // src/app/machine-fault-timeline/layout.tsx
 import React from 'react';
@@ -717,8 +717,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 | `/diagnosis-dashboard`   | 진단 대시보드          |
 | `/machine-fault-timeline`| 고장 진단 시계열        |
 
-![분리된 상태](images/nextjs_custom_tab_titles.png)
 > 각 페이지별 타이틀 분리 (수정후)
+![분리된 상태](images/nextjs_custom_tab_titles.png)
 
 이와 같은 구조를 통해
 각 페이지마다 독립된 탭 제목 설정이 가능해졌으며,
