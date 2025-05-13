@@ -631,6 +631,103 @@ AI 진단 결과를 분석하여 프론트엔드에 표시하는 구조로 이�
 Vercel 플랫폼을 이용해 무료 배포되었습니다.
 이로써 EC2와의 리소스 충돌을 피하고, 트래픽 분산 및 빠른 로딩 속도를 확보할 수 있었습니다.
 
+### 🛠️ Next.js 대시보드의 타이틀 문제 해결 과정
+프로젝트 발표 이후, 팀 리더님으로부터
+각 대시보드 페이지의 상단 탭 제목(title)이 모두 동일하게 "Create Next App"으로 표시되고 있다는 피드백을 받았습니다.
+
+#### ⚠️ 문제 상황
+Next.js의 기본 구조에서는 /src/app/layout.tsx 내에 설정된 metadata가
+모든 하위 페이지에 동일하게 적용되어, 각 대시보드 페이지의 **탭 타이틀(title)**이 동일하게 표시되는 문제가 있었습니다.
+| 기본 타이틀 (수정 전) | ![기본 상태](images/nextjs_default_tab_title.png) |
+```tsx
+export const metadata: Metadata = {
+  title: "스마트팩토리 MES 대시보드",
+  description: "MES 기반의 진단 시각화 플랫폼입니다.",
+};
+```
+이 구조에서는 모든 하위 페이지(/vibration-table, /diagnosis-dashboard, /machine-fault-timeline)가 동일한 제목을 가지게 됨
+
+결과적으로, 각 대시보드의 목적이 다른데도 불구하고
+브라우저 탭에 동일한 제목이 표시되어 혼동이 발생
+
+#### 🔍 해결 방안 탐색
+page.tsx에서 use client 환경에서는 export const metadata 사용이 불가
+반대로 서버 사이드에서만 사용하는 경우, 기존 클라이언트 컴포넌트를 활용할 수 없음
+
+#### ✅ 최종 구조 및 설정 방법
+
+📁 각 대시보드 폴더 구성 예시 (machine-fault-timeline 기준)
+```arduino
+/src/app/machine-fault-timeline/
+├── page.tsx         ← metadata 설정 및 Client 컴포넌트 호출
+├── layout.tsx       ← 최소 레이아웃 유지
+└── Client.tsx       ← 실제 대시보드 UI 구성
+```
+1. 'Client.tsx' – 클라이언트 컴포넌트 분리
+```tsx
+// src/app/machine-fault-timeline/Client.tsx
+'use client';
+
+export default function MachineFaultTimelineClient() {
+  return (
+    <div>여기에 기존 대시보드 구성 요소 출력</div>
+  );
+}
+```
+> 👉 대시보드 UI 로직 및 상호작용이 포함된 컴포넌트
+
+2. 'page.tsx' – Metadata 설정 및 Client 호출
+```tsx
+// src/app/machine-fault-timeline/page.tsx
+import { Metadata } from 'next';
+import MachineFaultTimelineClient from './Client';
+
+export const metadata: Metadata = {
+  title: '고장 진단 시계열',
+  description: '기계별 고장 상태를 시간 순으로 분석하는 페이지입니다',
+};
+
+export default function Page() {
+  return <MachineFaultTimelineClient />;
+}
+```
+> 👉 각 페이지별 탭 타이틀과 설명을 개별적으로 정의 가능
+
+3. 'layout.tsx' – 최소한의 HTML 구조 유지
+```tsx
+// src/app/machine-fault-timeline/layout.tsx
+import React from 'react';
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="ko">
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+> 👉 별도 공통 레이아웃이 필요 없는 경우, 최소한의 구조로 구성
+
+#### ✅ 적용 결과
+각 대시보드의 상단 탭(title)이 다음과 같이 개별 설정 가능해졌습니다:
+
+| 페이지 경로               | 탭 타이틀             |
+|--------------------------|------------------------|
+| `/vibration-table`       | 진동 데이터 테이블     |
+| `/diagnosis-dashboard`   | 진단 대시보드          |
+| `/machine-fault-timeline`| 고장 진단 시계열        |
+
+| 각 페이지별 타이틀 분리 (수정 후) | ![분리된 상태](images/nextjs_custom_tab_titles.png) |
+> 각 페이지별 타이틀 분리 (수정후)
+
+이와 같은 구조를 통해
+각 페이지마다 독립된 탭 제목 설정이 가능해졌으며,
+브라우저 탭, 북마크, 검색엔진 최적화(SEO) 등에도 긍정적인 영향을 줄 수 있습니다. ✅
+
+
+
+
+
 
 
 
