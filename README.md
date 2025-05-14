@@ -1,12 +1,12 @@
 # 프로젝트 HIM-MES
 
-## 1. 프로젝트 개요 📌
+## 0. 프로젝트 개요 📌
 
-### 1.1 프로젝트명 📁
+### 📁 프로젝트명
 
 스마트 팩토리 MES(Manufacturing Execution System) 프로젝트
 
-### 1.2 프로젝트 설명 📝
+### 📝 프로젝트 설명
 
 모듈형 MES 공정 데이터 파이프라인 설계 프로젝트입니다.
 데이터 분석이 아닌, 데이터 기반 의사 결정 인프라를 구축하는 데 중점을 두었습니다.
@@ -44,7 +44,7 @@
 
 ---
 
-## 2. 🧰 사용 기술 스택 (Used Tech Stack)
+## 2. 🧰 사용 기술 스택
 
 ### 🔙 백엔드 / 서버
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
@@ -67,10 +67,6 @@
 ### 🔧 개발 도구
 ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)
-
-### 📄 기타 정보
-![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen?style=flat)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=flat)
 
 ---
 
@@ -278,7 +274,7 @@ EC2는 결과적으로 다음과 같은 용도로 활용되었습니다:
 ![EC2 인스턴스 상태 화면](./images/aws_ec2_instance.png)  
 > FastAPI 서버가 배포된 EC2 인스턴스 실행 화면 (`him_EC2`)
 
-#### ✅ 보안 설정 (추가 설명)
+#### ✅ 보안 설정
 
 본 프로젝트는 팀 협업 및 테스트의 편의를 위해
 **RDS와 EC2 모두 퍼블릭 접근(0.0.0.0/0 허용)** 상태에서 운영하였습니다.
