@@ -86,6 +86,58 @@
 - AWS 환경에서의 **비용 청구 문제**
 → 탄력적 IP 요금, VPC 네트워크 비용 등 예상 외 지출 발생
 
+## 📷 주요 결과 화면
+
+### 🧱 1. 최종 DB 테이블 스키마
+
+```sql
+-- 진동 수집 데이터 테이블
+CREATE TABLE vibration_data (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    machine_name VARCHAR(50) NOT NULL,
+    sensor_no VARCHAR(20) NOT NULL,
+    collected_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    measured_time FLOAT NOT NULL,
+    normal FLOAT NOT NULL,
+    unbalance FLOAT NOT NULL,
+    looseness FLOAT NOT NULL,
+    unbalance_looseness FLOAT NOT NULL
+);
+
+-- 진단 결과 테이블
+CREATE TABLE vibration_diagnosis (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    machine_name VARCHAR(50) NOT NULL,
+    detected_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fault_type TINYINT NOT NULL CHECK (fault_type IN (0, 1, 2, 3))
+        COMMENT '0: 정상, 1: 질량 불균형, 2: 지지 불량, 3: 복합 불량'
+);
+```
+
+### 🖥️ 2. AWS RDS 및 EC2 콘솔
+
+![RDS 인스턴스 관리 화면](./images/aws_rds_dashboard.png)  
+> AWS RDS 인스턴스 상태 화면 – MySQL 기반 `him-mes` 데이터베이스
+
+![EC2 인스턴스 상태 화면](./images/aws_ec2_instance.png)  
+> FastAPI 서버가 배포된 EC2 인스턴스 실행 화면 (`him_EC2`)
+
+### 🔗 3. Swagger 자동 문서화 화면
+FastAPI의 /docs 엔드포인트를 통해 자동 생성된 Swagger 문서입니다.
+각 API의 엔드포인트, 메서드(GET/POST), 파라미터, 응답 예시 등을 직관적으로 확인할 수 있습니다.
+
+![FastAPI Swagger 문서](images/swagger_ui_example.png)
+> Swagger 문서 자동화 결과 (FastAPI `/docs` 화면)
+
+### 📊 4. 배포된 대시보드 화면
+| 페이지명       | 설명               | 링크                                                                           | 이미지                                               |
+| ---------- | ---------------- | ---------------------------------------------------------------------------- | ------------------------------------------------- |
+| 진동 데이터 테이블 | 진동 데이터 필터링 및 확인  | [vibration-table](https://him-mes-vercel.vercel.app/vibration-table)         | ![vibration](images/nextjs_vibration_table.png) |
+| 진단 결과 대시보드 | 기계별 진단 상태 요약 시각화 | [diagnosis-dashboard](https://him-mes-vercel.vercel.app/diagnosis-dashboard) | ![diag](images/nextjs_diagnosis_dashboard.png)  |
+| 고장 진단 시계열  | 시간 흐름에 따른 고장 변화  | [fault-timeline](https://him-mes-vercel.vercel.app/machine-fault-timeline)   | ![fault](images/nextjs_fault_timeline.png)      |
+
+
+
 ### 💡 해결 방법 및 성과
 
 - **✅ FastAPI Bulk API 도입**
@@ -114,20 +166,3 @@
 모두 체감하고 학습할 수 있었던 **종합 실무 경험의 기회, 앞으로의 개발자로서의 성장 기반이 되었습니다.**
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
