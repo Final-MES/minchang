@@ -110,6 +110,15 @@ CREATE TABLE vibration_diagnosis (
 FastAPI의 /docs 엔드포인트를 통해 자동 생성된 Swagger 문서입니다.
 각 API의 엔드포인트, 메서드(GET/POST), 파라미터, 응답 예시 등을 직관적으로 확인할 수 있습니다.
 
+예시 API 코드:
+
+```python
+@app.get("/vibration-diagnosis/grouped-recent", summary="기계별 최근 N개의 진단 결과 추출")
+```
+
+> 📌 기계명을 기준으로 그룹화하여 각 기계의 최근 진단 결과를 N개씩 추출하는 API입니다.
+SQL의 ROW_NUMBER()와 PARTITION BY 구문을 통해 구현되었습니다.
+
 ![FastAPI Swagger 문서](images/swagger_ui_example.png)
 > Swagger 문서 자동화 결과 (FastAPI `/docs` 화면)
 
